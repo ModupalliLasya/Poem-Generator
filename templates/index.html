@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poem Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="floating-bg"></div>
+    <div class="container">
+        <div class="header">
+            <h1>CalmMind Poetry Generator</h1>
+        </div>
+        <div class="prompt-box">
+            <form action="/generate_poem" method="post" onsubmit="showLoading()">
+                <label for="prompt">Enter a topic to generate a poem:</label><br>
+                <input type="text" id="prompt" name="prompt" placeholder="Enter your topic here..." required>
+                <br><br>
+                <button type="submit" class="generate-btn">Generate Poem</button>
+            </form>
+            <div class="loading" id="loading" style="display:none;">Generating your poem...</div>
+        </div>
+
+        {% if poem %}
+        <div class="poem-box">
+            <h2>Your AI-Generated Poem:</h2>
+            <div class="poem">{{ poem|safe }}</div>
+        </div>        
+        {% endif %}
+    </div>
+
+    <script>
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
